@@ -1,7 +1,7 @@
 {
-  "name": "requests",
+  "name": "apiboy",
   "version": "1.0.0",
-  "description": "javascript library created to simplify working with REST api by providing a set of features and utilities",
+  "description": "library created to simplify working with REST api by providing a set of features and utilities",
   "main": "api.js",
   "author": "andrenovax@gmail.com",
   "license": "MIT",

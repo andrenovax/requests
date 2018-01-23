@@ -1,6 +1,6 @@
 ### About
 
-Requests is a javascript library created to simplify working with REST api by providing a set of features and utilities:
+Apiboy is a javascript library created to simplify working with REST api by providing a set of features and utilities:
 
 * fetch methods with relative url
 * CRUD api model
@@ -16,16 +16,16 @@ fetch methods with relative url
 
 
 ```js
-import requests from 'requests'
+import apiboy from 'apiboy'
 
-// Configure requests on init
-requests.setConfig('https://your.api.url.com/')
+// Configure apiboy on init
+apiboy.setConfig('https://your.api.url.com/')
 
 // Now you can do
-requests.get('someurlget')
-requests.post('someurlpost')
-requests.put('someurlput')
-requests.del('someurldelete')
+apiboy.get('someurlget')
+apiboy.post('someurlpost')
+apiboy.put('someurlput')
+apiboy.del('someurldelete')
 
 // Which will be the same as
 fetch('https://your.api.url.com/someurlget', { method: 'GET' })
@@ -39,14 +39,14 @@ CRUD api Model
 
 
 ```js
-import requests from 'requests'
+import apiboy from 'apiboy'
 
-// Configure requests on init
+// Configure apiboy on init
 // NOTE! config can't be updated after that
-requests.setConfig('https://your.api.url.com/')
+apiboy.setConfig('https://your.api.url.com/')
 
 // Make item api
-const itemApi = new requests.RequestModel('item')
+const itemApi = new apiboy.RequestModel('item')
 
 // Now you can do
 let item = { id: 2, value: 'test' }
@@ -71,27 +71,27 @@ Cancel repeatable GET requests!
 
 
 ```js
-import requests from 'requests'
+import apiboy from 'apiboy'
 
 // Cancel all repeatable get requests by default by providing second argument in setConfig
-requests.setConfig('https://your.api.url.com/', true)
+apiboy.setConfig('https://your.api.url.com/', true)
 
 
-requests.get('someurl') // This promise will be rejected with { isCanceled: true, error: '{key} request is canceled by the next request' }
-requests.get('someurl') // This promise will be rejected with { isCanceled: true, error: '{key} request is canceled by the next request' }
-requests.get('someurl') // works well
+apiboy.get('someurl') // This promise will be rejected with { isCanceled: true, error: '{key} request is canceled by the next request' }
+apiboy.get('someurl') // This promise will be rejected with { isCanceled: true, error: '{key} request is canceled by the next request' }
+apiboy.get('someurl') // works well
 
 // Or dont by specifying third argument
-requests.get('someurl', null, false) // works well
-requests.get('someurl', null, false) // works well
-requests.get('someurl', null, false) // works well
+apiboy.get('someurl', null, false) // works well
+apiboy.get('someurl', null, false) // works well
+apiboy.get('someurl', null, false) // works well
 ```
 
 
 Default Middleware
 
 
-Requests has default middleware for parsing responses, which will give you:
+Apiboy has default middleware for parsing responses, which will give you:
 
 * response.json() on success
 * 'Server Error, 500' message on 500
@@ -108,15 +108,15 @@ Add request middleware to parse url and config before sending request
 
 
 ```js
-import requests from 'requests'
+import apiboy from 'apiboy'
 
-requests.setConfig('https://your.api.url.com/')
+apiboy.setConfig('https://your.api.url.com/')
 
 // for showcase purposes
 let mobile = true
 
 // Set custom middleware. Can be done only once
-requests.setMiddleware({
+apiboy.setMiddleware({
   requests: [requestMiddlewareOne, requestMiddlewareOne],
   responses: []
 })
@@ -143,9 +143,9 @@ function requestMiddlewareTwo (url, config) {
 }
 
 // And after each request like
-requests.post('someurl')
-requests.delete('someurl')
-requests.get('someurl')
+apiboy.post('someurl')
+apiboy.delete('someurl')
+apiboy.get('someurl')
 
 // You'll get
 fetch('https://your.api.url.com/someurl/mobile/', { method: 'POST', mode: 'cors', headers: HeadersObject })
@@ -160,15 +160,15 @@ Add response middleware to parse url and config before sending request
 
 
 ```js
-import requests from 'requests'
+import apiboy from 'apiboy'
 
-requests.setConfig('https://your.api.url.com/')
+apiboy.setConfig('https://your.api.url.com/')
 
 // for showcase purposes
 let user = { isAuthenticated: false }
 
 // Set custom middleware. Can be done only once
-requests.setMiddleware({
+apiboy.setMiddleware({
   requests: [],
   responses: [responseMiddlewareOne]
 })
@@ -205,9 +205,9 @@ function responseMiddlewareOne (promise) {
 }
 
 // And after request like
-requests.post('someurl')
-requests.delete('someurl')
-requests.get('someurl')
+apiboy.post('someurl')
+apiboy.delete('someurl')
+apiboy.get('someurl')
 
 // If it returns error with 403 code, you'll get Promise that will be resolved to
 // { error: 'User is not authorized' }
@@ -218,20 +218,20 @@ Make absolute requests with abs to use middleware provided
 
 
 ```js
-import requests from 'requests'
+import apiboy from 'apiboy'
 import { responseMiddlewareOne } from 'responseMiddlewareOne'
 
-// Configure requests on init
-requests.setConfig('https://your.api.url.com/')
+// Configure apiboy on init
+apiboy.setConfig('https://your.api.url.com/')
 
 // Set custom middleware. Can be done only once
-requests.setMiddleware({
+apiboy.setMiddleware({
   requests: [],
   responses: [responseMiddlewareOne]
 })
 
 
-requests.abs('http://some.abs.url.com')
+apiboy.abs('http://some.abs.url.com')
 
 // all the request and response middleware will be executed
 ```
@@ -244,4 +244,4 @@ requests.abs('http://some.abs.url.com')
 * offline support
 * write more detailed README
 * document code
-* write test for canceled requests
+* write tests for canceled requests
