@@ -1,0 +1,25 @@
+{
+  "name": "requests",
+  "version": "1.0.0",
+  "description": "javascript library created to simplify working with REST api by providing a set of features and utilities",
+  "main": "api.js",
+  "author": "andrenovax@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.0.6",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "jest": "^22.0.6"
+  },
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --verbose --collectCoverage",
+    "build": "babel src --out-dir dist",
+    "fix": "eslint --fix src/ tests/"
+  }
+}
